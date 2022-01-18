@@ -30,6 +30,18 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- Oracle Jdbc -->
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.4</version>
+		</dependency>
+		<!-- jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 	</dependencies>
 	<!-- //Spring Labrary 의존성 추가-->
