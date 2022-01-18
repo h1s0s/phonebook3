@@ -19,7 +19,7 @@
 		<br>
 		회사(company) : <input type="text" name="company" value="${requestScope.personVo.company}">
 		<br>
-		코드(id) : <input type="text" name="personid" value="${requestScope.personVo.personId}">
+		코드(id) : <input type="text" name="personId" value="${requestScope.personVo.personId}">
 		<br>
 		<button type="submit">수정</button>
 	</form>

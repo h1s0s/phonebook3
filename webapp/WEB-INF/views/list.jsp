@@ -28,8 +28,8 @@
 				<td>${personVo.company}</td>
 			</tr>
 			<tr>
-				<td><a href="/phonebook3/phone/=${personVo.no}">[수정]</a></td>
-				<td><a href="/phonebook3/pbc?action=delete&personid=${personVo.no}">[삭제]</a></td>
+				<td><a href="/phonebook3/phone/updateForm?personId=${personVo.personId}">[수정]</a></td>
+				<td><a href="/phonebook3/phone/delete?personId=${personVo.personId}">[삭제]</a></td>
 			</tr>
 		</table>
 		<br>

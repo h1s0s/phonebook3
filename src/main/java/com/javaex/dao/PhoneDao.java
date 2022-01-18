@@ -18,7 +18,7 @@ public class PhoneDao {
 	ResultSet rs = null;
 
 	private String driver = "oracle.jdbc.driver.OracleDriver";
-	private String url = "jdbc:oracle:thin:@192.168.0.52:1521:xe";
+	private String url = "jdbc:oracle:thin:@172.30.1.55:1521:xe";
 	private String id = "phonedb";
 	private String pw = "phonedb";
 
@@ -54,50 +54,50 @@ public class PhoneDao {
 			System.out.println("error:" + e);
 		}
 	}
+
 	// 사람 추가
 	// 사람 1명정보만 가져올때
-	   public PersonVo getPerson(int personId) {
-	      PersonVo personVo = null;
-	      
-	      getConnection();
+	public PersonVo getPerson(int personId) {
+		PersonVo personVo = null;
 
-	      try {
+		getConnection();
 
-	         // 3. SQL문 준비 / 바인딩 / 실행 --> 완성된 sql문을 가져와서 작성할것
-	         String query = "";
-	         query += " select  person_id, ";
-	         query += "         name, ";
-	         query += "         hp, ";
-	         query += "         company ";
-	         query += " from person ";
-	         query += " where person_id = ? ";
+		try {
 
-	         pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			// 3. SQL문 준비 / 바인딩 / 실행 --> 완성된 sql문을 가져와서 작성할것
+			String query = "";
+			query += " select  person_id, ";
+			query += "         name, ";
+			query += "         hp, ";
+			query += "         company ";
+			query += " from person ";
+			query += " where person_id = ? ";
 
-	         pstmt.setInt(1, personId); // ?(물음표) 중 1번째, 순서중요
-	         
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 
-	         rs = pstmt.executeQuery();
+			pstmt.setInt(1, personId); // ?(물음표) 중 1번째, 순서중요
 
-	         // 4.결과처리
-	            rs.next();
-	            int id = rs.getInt("person_id");
-	            String name = rs.getString("name");
-	            String hp = rs.getString("hp");
-	            String company = rs.getString("company");
+			rs = pstmt.executeQuery();
 
-	            personVo = new PersonVo(id, name, hp, company);
-	         
+			// 4.결과처리
+			rs.next();
+			int id = rs.getInt("person_id");
+			String name = rs.getString("name");
+			String hp = rs.getString("hp");
+			String company = rs.getString("company");
 
-	      } catch (SQLException e) {
-	         System.out.println("error:" + e);
-	      }
+			personVo = new PersonVo(id, name, hp, company);
 
-	      close();
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
 
-	      return personVo;
+		close();
 
-	   }
+		return personVo;
+
+	}
+
 	public int personInsert(PersonVo personVo) {
 		int count = 0;
 		getConnection();
@@ -127,9 +127,8 @@ public class PhoneDao {
 		close();
 		return count;
 	}
-	
-	
-	//사람 리스트(검색안할때)
+
+	// 사람 리스트(검색안할때)
 	public List<PersonVo> getPersonList() {
 		return getPersonList("");
 	}
@@ -186,7 +185,6 @@ public class PhoneDao {
 
 	}
 
-
 	// 사람 수정
 	public int personUpdate(PersonVo personVo) {
 		int count = 0;
@@ -230,7 +228,7 @@ public class PhoneDao {
 		try {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = ""; // 쿼리문 문자열만들기, ? 주의
-			query += " delete from person ";
+			query += " delete person ";
 			query += " where person_id = ? ";
 			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 
