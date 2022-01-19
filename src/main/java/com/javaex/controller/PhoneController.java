@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ public class PhoneController {
 	public String writeForm() {
 		System.out.println("PhoneController>writeForm");
 
-		return "/WEB-INF/views/writeForm.jsp";
+		return "writeForm";
 	}
 
 	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
@@ -66,7 +67,7 @@ public class PhoneController {
 		// 컨트롤러 -->> DS로 데이터를 보낸다
 		model.addAttribute("personList", personList);
 
-		return "/WEB-INF/views/list.jsp";
+		return "list";
 	}
 
 	@RequestMapping(value = "/updateForm", method = { RequestMethod.GET, RequestMethod.POST })
@@ -77,7 +78,7 @@ public class PhoneController {
 
 		model.addAttribute("personVo", personVo);
 
-		return "/WEB-INF/views/updateForm.jsp";
+		return "updateForm";
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST })
@@ -96,5 +97,26 @@ public class PhoneController {
 		new PhoneDao().personDelete(personId);
 
 		return "redirect:/phone/list";
+	}
+	
+	//RequestParam 에 값이 없으면 디폴트로 정한 값을 부여
+	@RequestMapping(value = "/test", method = { RequestMethod.GET, RequestMethod.POST })
+	public String test(@RequestParam(value = "name") String name,
+					   @RequestParam(value = "age", required = false, defaultValue = "-1") int age) {
+		System.out.println("PhoneController>test");
+
+		System.out.println(name);
+		System.out.println(age);
+
+		return "writeForm";
+	}
+	//PathVariable : Mapping 주소를 변수화
+	@RequestMapping(value = "/view/{no}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String view(@PathVariable("no") int no) {
+		System.out.println("PhoneController>view");
+
+		System.out.println(no + "번글 가져오기");
+		
+		return "writeForm";
 	}
 }

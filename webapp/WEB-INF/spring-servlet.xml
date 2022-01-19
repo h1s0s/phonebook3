@@ -18,4 +18,13 @@
 	<context:component-scan
 		base-package="com.javaex.controller" />
 
+	<!-- View resolver기본 뷰 리졸버 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" /><!-- 경로 앞에 -->
+		<property name="suffix" value=".jsp" /><!-- 경로 뒤에 -->
+		<property name="order" value="1" />
+	</bean>
 </beans>
